@@ -1,0 +1,2 @@
+font-face { font-family: 'IranSans'; src: url("https://player.vidad.net/fonts/IranSans/normal-fa.woff2") format("woff2"), url("https://player.vidad.net/fonts/IranSans/normal-fa.woff") format("woff"), url("https://player.vidad.net/fonts/IranSans/normal-fa.ttf") format("truetype"); }
+.page-inner{direction: rtl; font-family: 'IranSans';}
