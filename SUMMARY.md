@@ -1,4 +1,5 @@
 # Summary
 
-* [First Chapter](chapter1.md)
+* [مقدمه](intro.md)
 * [سوره حمد](001.md)
+* [سوره بقره](002.md)
