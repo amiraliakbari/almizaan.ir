@@ -4,8 +4,6 @@ var SURAH = [
     {name: 'بقره', len: 3},
 ];
 
-var lastHash = '1:1';
-
 var page = {
     surah: 1,
     ayah: 1,
@@ -19,16 +17,18 @@ var page = {
 
 
 function hashHandler() {
-    var ref = window.location.hash.substr(1).split(':');
-    if (ref.length != 2) {
-        ref = ['1', '1'];
-        window.location.hash = lastHash;
+    var surah = 1;
+    var ayah = 1;
+    var m = window.location.pathname.match(RegExp(/\/quran\/(\d+)\/(\d+)\//));
+    if (m) {
+        surah = m[1];
+        ayah = m[2];
     } else {
-        var surah = ref[0] || 1;
-        var ayah = ref[1] || 1;
-        lastHash = surah + ':' + ayah;
-        loadAyah(surah, ayah);
+        window.history.replaceState({surah: surah, ayah: ayah}, title, '/quran/1/1/');
     }
+    var title = 'تفسیر المیزان: سوره ' + (surah < SURAH.length ? SURAH[surah].name : surah) + ' آیه ' + ayah;
+    document.title = title;
+    loadAyah(surah, ayah);
 }
 
 function detectHeading() {
@@ -46,13 +46,26 @@ function detectHeading() {
     page.scrollY = y;
 }
 
+function insertToc() {
+    $('<div id="toc" class="card-deck"></div>').insertAfter('#content translation');
+    page.headings.forEach(function (heading, i) {
+        $('#toc').append('<div class="card" data-section="'+i+'"><div class="card-body"><p>'+heading+'</p></div></div>');
+    });
+    $('#toc .card').click(function () { gotoSection($(this).data('section')); });
+}
+
 function refreshPage() {
+    page.surahName = page.surah < SURAH.length ? SURAH[page.surah].name : page.surah;
+    page.surahLen = page.surah < SURAH.length ? SURAH[page.surah].len : 1;
     page.scrollY = -1;
     page.headings = [];
     page.headingPositions = [];
     document.getElementById('title').innerText = 'تفسیر المیزان: سوره ' + page.surahName + ' آیه ' + page.ayah;
     document.querySelectorAll('#content h2').forEach(function (el) {
         page.headings.push(el.innerText);
+    });
+    insertToc();
+    document.querySelectorAll('#content h2').forEach(function (el) {
         page.headingPositions.push(el.offsetTop);
     });
     detectHeading();
@@ -61,13 +74,23 @@ function refreshPage() {
 function loadAyah(surah, ayah) {
     ayah = Number(ayah);
     surah = Number(surah);
+
+    // Check if data is preloaded
+    var currentAyah = Number($('#content ayah').attr('number'));
+    var currentSurah = Number($('#content ayah').attr('surah'));
+    if (currentSurah === surah && currentAyah === ayah) {
+        page.surah = surah;
+        page.ayah = ayah;
+        refreshPage();
+        return;
+    }
+
+    // Fetch page data
     $.ajax({
         url: '/data/' + surah + '/' + ayah + '.html',
         success: function(data) {
             page.surah = surah;
             page.ayah = ayah;
-            page.surahName = surah < SURAH.length ? SURAH[surah].name : surah;
-            page.surahLen = surah < SURAH.length ? SURAH[surah].len : 1;
             $('#content').html(data);
             refreshPage();
         },
@@ -102,13 +125,23 @@ function loadPrevAyah() {
 }
 
 function gotoAyah(surah, ayah) {
-    window.location.hash = surah + ':' + ayah;
+    window.history.pushState({surah: surah, ayah: ayah}, title, '/quran/' + surah + '/' + ayah + '/');
+    hashHandler();
+    gotoTop();
+}
+
+function gotoSection(section) {
+    window.scrollTo(0, page.headingPositions[section] || 0);
+}
+
+function gotoTop() {
+    $('html, body').animate({ scrollTop: 0 }, 'slow');
 }
 
 $(function() {
     page.hOffset = Math.floor(document.documentElement.clientHeight * 0.3);
-    window.addEventListener('hashchange', hashHandler, false);
     hashHandler();
+    window.addEventListener('popstate', hashHandler);
     setInterval(detectHeading, 1000);
     $('#button-next').click(loadNextAyah);
     $('#button-prev').click(loadPrevAyah);

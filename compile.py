@@ -1,6 +1,18 @@
 #!/usr/bin/env python3
 import os
 
+
+def write_data(surah, ayah, data):
+    os.makedirs(os.path.join('data', str(surah)), exist_ok=True)
+    with open(os.path.join('data', str(surah), '{}.html'.format(ayah)), 'w') as output_file:
+        output_file.write(data)
+    with open(os.path.join('quran', 'index.html')) as template_file:
+        template = template_file.read()
+    os.makedirs(os.path.join('quran', str(surah), str(ayah)), exist_ok=True)
+    with open(os.path.join('quran', str(surah), str(ayah), 'index.html'), 'w') as output_file:
+        output_file.write(template.replace('<!--DATA-->', data))
+
+
 file_list = os.listdir('raw')
 file_list.sort()
 for filename in file_list:
@@ -8,7 +20,7 @@ for filename in file_list:
         surah = int(filename[:-3])
         ayah = 0
         last_section = ''
-        output = None
+        output_str = ''
         for l in source_file:
             l = l.strip()
             if not l:
@@ -35,24 +47,23 @@ for filename in file_list:
                 if command == 'پایان':
                     break
                 elif command == 'آیه':
-                    if output is not None:
-                        output.write('</section>\n')
-                        output.close()
+                    if output_str:
+                        output_str += '\n</section>\n'
+                        write_data(surah, ayah, output_str)
                     ayah += 1
-                    os.makedirs(os.path.join('data', str(surah)), exist_ok=True)
-                    output = open(os.path.join('data', str(surah), '{}.html'.format(ayah)), 'w')
-                    output.write('<section>\n    <ayah number="{}" surah="{}">{}</ayah>\n'.format(ayah, surah, text))
+                    output_str = ''
+                    output_str += '<section>\n    <ayah number="{}" surah="{}">{}</ayah>\n'.format(ayah, surah, text)
                 elif command == 'ترجمه':
-                    output.write('    <translation>{}</translation>\n'.format(text))
+                    output_str += '    <translation>{}</translation>\n'.format(text)
                 elif command == 'بخش':
                     last_section = text
-                    output.write('\n    <h2>{}</h2>\n'.format(text))
+                    output_str += '\n    <h2>{}</h2>\n'.format(text)
                 elif command == 'حاشیه':
-                    output.write('    <tag>{}</tag>\n'.format(text or last_section))
+                    output_str += '    <tag>{}</tag>\n'.format(text or last_section)
                 else:
                     print('Warning: Invalid Command: "{}"'.format(command))
             else:
-                output.write('    <p>{}</p>\n'.format(l))
-        if output is not None:
-            output.write('\n</section>\n')
-            output.close()
+                output_str += '    <p>{}</p>\n'.format(l)
+        if output_str:
+            output_str += '\n</section>\n'
+            write_data(surah, ayah, output_str)
