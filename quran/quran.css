@@ -1,0 +1,12 @@
+ayah { display: block; border-bottom: 1px solid #e5e5e5; padding: 15px 0; font-size: 20px; text-align: center; }
+translation { display: block; border-bottom: 1px solid #e5e5e5; padding: 15px 0; font-size: 18px; margin-bottom: 40px; text-align: center; }
+h2 { font-size: 20px; margin: 24px 0 8px 0; }
+tag { float: left; display: none; }
+#content { margin-top: -1rem; }
+#content section p {text-align: justify; font-size: 15px; line-height: 2.3rem;}
+footer { position: relative; margin: 50px 0; }
+#menu { position: fixed; bottom: 0; left: 0; right: 0; background-color: #FFF; height: 40px; border: 1px solid #e5e5e5; z-index: 1; text-align: center;}
+#menu .btn { margin-top: 2px;}
+#menu .btn#button-next { position: absolute; left: 3px; bottom: 2px; }
+#menu .btn#button-prev { position: absolute; right: 3px; bottom: 2px; }
+#menu #menu-text { position: absolute; top: 8px; text-align: center; left: 55px; right: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
