@@ -1,7 +1,7 @@
 var SURAH = [
     {},
     {name: 'حمد', len: 7},
-    {name: 'بقره', len: 3},
+    {name: 'بقره', len: 5},
 ];
 
 var page = {
