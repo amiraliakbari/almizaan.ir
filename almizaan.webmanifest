@@ -1,0 +1,15 @@
+{
+  "background_color": "white",
+  "description": "ترجمه آنلاین تفسیر المیزان، با متن خوانا، دسته‌بندی و ویرایش شده، مناسب برای مطالعه در گوشی موبایل و رایانه",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "name": "تفسیر المیزان",
+  "short_name": "المیزان",
+  "start_url": "/"
+}

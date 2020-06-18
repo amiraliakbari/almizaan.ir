@@ -19,12 +19,19 @@ var page = {
 function hashHandler() {
     var surah = 1;
     var ayah = 1;
+    // Check hash as default value
+    var h = window.location.hash.match(RegExp(/#(\d+)\/(\d+)\//));
+    if (h) {
+      surah = h[1];
+      ayah = h[2];
+    }
+    // Check url and replace if not set or invalid
     var m = window.location.pathname.match(RegExp(/\/quran\/(\d+)\/(\d+)\//));
     if (m) {
         surah = m[1];
         ayah = m[2];
     } else {
-        window.history.replaceState({surah: surah, ayah: ayah}, title, '/quran/1/1/');
+        window.history.replaceState({surah: surah, ayah: ayah}, title, '/quran/' + surah + '/' + ayah + '/');
     }
     var title = 'تفسیر المیزان: سوره ' + (surah < SURAH.length ? SURAH[surah].name : surah) + ' آیه ' + ayah;
     document.title = title;

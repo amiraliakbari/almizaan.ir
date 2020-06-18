@@ -25,3 +25,4 @@ html { font-size: 14px; }
 #surah-list .card-title { text-align: center;}
 .placeholder-v { min-height: 80px; }
 footer { position: fixed; bottom: 0; left: 0; right: 0; background-color: #FFF; }
+footer .version { color: #BBB; position: absolute; bottom: 0; left: 12px; }
