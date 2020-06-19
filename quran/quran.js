@@ -20,8 +20,9 @@ var page = {
 function hashHandler() {
     var surah = 1;
     var ayah = 1;
+    var initialHash = window.location.hash;
     // Check hash as default value
-    var h = window.location.hash.match(RegExp(/#(\d+)\/(\d+)\//));
+    var h = initialHash.match(RegExp(/#(\d+)\/(\d+)\//));
     if (h) {
       surah = h[1];
       ayah = h[2];
@@ -32,11 +33,20 @@ function hashHandler() {
         surah = m[1];
         ayah = m[2];
     } else {
-        window.history.replaceState({surah: surah, ayah: ayah}, title, '/quran/' + surah + '/' + ayah + '/');
+        window.history.replaceState({surah: surah, ayah: ayah}, null, '/quran/' + surah + '/' + ayah + '/');
     }
     var title = 'تفسیر المیزان: سوره ' + (surah < SURAH.length ? SURAH[surah].name : surah) + ' آیه ' + ayah;
     document.title = title;
     loadAyah(surah, ayah);
+    // Handle search query
+    if (initialHash == '#search') {
+      $('.navbar-collapse').collapse('hide');
+      toggleGoto();
+    }
+    // Remove any hash in the url
+    if (initialHash.length > 0) {
+      window.history.replaceState({surah: surah, ayah: ayah}, null, '/quran/' + surah + '/' + ayah + '/');
+    }
 }
 
 function detectHeading() {
