@@ -7,6 +7,9 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+window.q = document.querySelector.bind(document);
+window.qAll = document.querySelectorAll.bind(document);
+
 $(function () {
   $('#surah-list .card').click(function () {
     var surah = $(this).closest('.card').data('surah');
