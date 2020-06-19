@@ -5,8 +5,8 @@ div, p, li, h1, h2, h3, h4, nav { text-align: right; }
 .card .list-unstyled { padding-left: 0; }
 
 /* Typography */
-@font-face { font-family: IRANSans; font-style: normal; font-weight: normal; src: url('https://cdn.nobitex.ir/fonts/IRANSans/IRANSans.woff2') format('woff2'), url('https://cdn.nobitex.ir/fonts/IRANSans/IRANSans.woff') format('woff'), url('https://cdn.nobitex.ir/fonts/IRANSans/IRANSans.ttf') format('truetype'); }
-@font-face { font-family: IRANSans; font-style: normal; font-weight: bold; src: url('https://cdn.nobitex.ir/fonts/IRANSans/IRANSans_Bold.woff2') format('woff2'), url('https://cdn.nobitex.ir/fonts/IRANSans/IRANSans_Bold.woff') format('woff'), url('https://cdn.nobitex.ir/fonts/IRANSans/IRANSans_Bold.ttf') format('truetype'); }
+@font-face { font-family: IRANSans; font-style: normal; font-weight: normal; src: url('/fonts/IRANSans/IRANSans.woff2') format('woff2'), url('/fonts/IRANSans/IRANSans.woff') format('woff'), url('/fonts/IRANSans/IRANSans.ttf') format('truetype'); }
+@font-face { font-family: IRANSans; font-style: normal; font-weight: bold; src: url('/fonts/IRANSans/IRANSans_Bold.woff2') format('woff2'), url('/fonts/IRANSans/IRANSans_Bold.woff') format('woff'), url('/fonts/IRANSans/IRANSans_Bold.ttf') format('truetype'); }
 div, p, li, h1, h2, h3, h4, nav, a, b, span, small { font-family: IRANSans, IRYekan, BYekan, Tahoma, sans-serif; }
 html { font-size: 14px; }
 @media (min-width: 768px) { html { font-size: 16px; } }
@@ -15,6 +15,7 @@ html { font-size: 14px; }
 .border-top { border-top: 1px solid #e5e5e5; }
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+.container-text p { text-align: justify; font-size: 15px; line-height: 2.3rem; }
 
 /* Page Layout */
 .container { max-width: 960px; }
@@ -24,5 +25,7 @@ html { font-size: 14px; }
 #surah-list .card { cursor: pointer; }
 #surah-list .card-title { text-align: center;}
 .placeholder-v { min-height: 80px; }
-footer { position: fixed; bottom: 0; left: 0; right: 0; background-color: #FFF; }
+footer { position: relative; margin-top: 50px; }
+footer.elevated { margin-bottom: 50px; }
+footer.sticky { position: fixed; bottom: 0; left: 0; right: 0; background-color: #FFF; }
 footer .version { color: #BBB; position: absolute; bottom: 0; left: 12px; }
