@@ -1,0 +1,30 @@
+ayah { display: block; border-bottom: 1px solid #e5e5e5; padding: 15px 0; font-size: 20px; text-align: center; }
+translation { display: block; border-bottom: 1px solid #e5e5e5; padding: 15px 0; font-size: 18px; margin-bottom: 20px; text-align: center; }
+h2 { font-size: 20px; margin: 24px 0 8px 0; }
+tag { float: left; display: none; }
+#content { margin-top: -1rem; }
+#content section p {text-align: justify; font-size: 15px; line-height: 2.3rem;}
+
+#menu { position: fixed; bottom: 0; left: 0; right: 0; background-color: #FFF; height: 40px; border: 1px solid #e5e5e5; z-index: 2; text-align: center;}
+#menu .btn { margin-top: 2px; position: absolute; bottom: 2px; padding-left: 7px; padding-right: 7px; font-weight: bold; }
+#menu .btn#button-next-ayah { left: 2px; }
+#menu .btn#button-prev-ayah { right: 2px; }
+#menu .btn#button-next-section { left: 34px; }
+#menu .btn#button-prev-section { right: 34px; }
+#menu #menu-text { position: absolute; top: 8px; text-align: center; left: 75px; right: 75px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
+@media (min-width: 576px) {
+  #menu { height: 46px; }
+  #menu .btn#button-next-section { left: 37px; }
+  #menu .btn#button-prev-section { right: 37px; }
+}
+
+#toc { margin-bottom: 40px; }
+#toc .card { cursor: pointer; min-width: 125px; margin: 15px; }
+#toc .card .card-body { padding: 5px 10px; }
+#toc .card .card-body p { margin-bottom: 0; font-size: 14px; text-align: center; }
+
+#goto-div { position: fixed; bottom: 39px; left: 0; right: 0; height: 0; border: 1px solid #e5e5e5; background-color: #FFF; z-index: 1; padding: 0 5%; }
+#goto-div button[type="submit"] { margin: 0 auto; width: 50%; max-width: 400px;}
+@media (min-width: 576px) {
+  #goto-div { bottom: 45px; }
+}
