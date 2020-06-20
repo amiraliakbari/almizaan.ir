@@ -5,8 +5,7 @@ div, p, li, h1, h2, h3, h4, nav { text-align: right; }
 .card .list-unstyled { padding-left: 0; }
 
 /* Typography */
-@font-face { font-family: IRANSans; font-style: normal; font-weight: normal; src: url('/fonts/IRANSans/IRANSans.woff2') format('woff2'), url('/fonts/IRANSans/IRANSans.woff') format('woff'), url('/fonts/IRANSans/IRANSans.ttf') format('truetype'); }
-@font-face { font-family: IRANSans; font-style: normal; font-weight: bold; src: url('/fonts/IRANSans/IRANSans_Bold.woff2') format('woff2'), url('/fonts/IRANSans/IRANSans_Bold.woff') format('woff'), url('/fonts/IRANSans/IRANSans_Bold.ttf') format('truetype'); }
+@font-face { font-family: IRANSans; font-style: normal; font-weight: normal; src: local('IRANSans'), url('/fonts/IRANSans/IRANSans.woff2') format('woff2'), url('/fonts/IRANSans/IRANSans.woff') format('woff'), url('/fonts/IRANSans/IRANSans.ttf') format('truetype'); font-display: swap; }
 div, p, li, h1, h2, h3, h4, nav, a, b, span, small { font-family: IRANSans, IRYekan, BYekan, Tahoma, sans-serif; }
 html { font-size: 14px; }
 @media (min-width: 768px) { html { font-size: 16px; } }
